@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SweetCrust Bakery</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Georgia, "Times New Roman", serif;
+    color:#352319;
+    background:#fff;
+}
+
+button,
+input{
+    font-family:Arial, sans-serif;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.container{
+    width:min(1120px, calc(100% - 40px));
+    margin:auto;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.top-bar{
+    height:38px;
+    background:#332017;
+    color:#fff;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+}
+
+.top-inner{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.top-left{
+    display:flex;
+    gap:30px;
+}
+
+.top-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.socials{
+    display:flex;
+    gap:18px;
+    font-size:14px;
+}
+
+.socials span{
+    cursor:pointer;
+    transition:.2s;
+}
+
+.socials span:hover{
+    color:#d7a06d;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+    height:82px;
+    background:#fff;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:relative;
+    z-index:50;
+}
+
+.nav-inner{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:245px;
+}
+
+.logo-cupcake{
+    width:45px;
+    height:45px;
+    position:relative;
+    font-size:40px;
+    line-height:45px;
+}
+
+.logo-text{
+    font-size:25px;
+    font-weight:bold;
+    font-style:italic;
+    line-height:22px;
+    color:#432719;
+}
+
+.logo-text small{
+    display:block;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:5px;
+    text-align:center;
+    margin-top:4px;
+    font-style:normal;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    font-weight:600;
+}
+
+.nav-links a{
+    position:relative;
+    padding:32px 0;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    bottom:19px;
+    left:0;
+    right:0;
+    height:2px;
+    background:#a76439;
+    transform:scaleX(0);
+    transition:.25s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+    transform:scaleX(1);
+}
+
+.order-btn{
+    background:#7a4528;
+    color:white;
+    border:none;
+    border-radius:5px;
+    padding:11px 18px;
+    font-size:12px;
+    transition:.25s;
+}
+
+.order-btn:hover{
+    background:#59301c;
+    transform:translateY(-2px);
+}
+
+.cart-count{
+    background:white;
+    color:#7a4528;
+    border-radius:50%;
+    min-width:18px;
+    height:18px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    margin-left:5px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.menu-btn{
+    display:none;
+    background:none;
+    border:none;
+    font-size:27px;
+    color:#432719;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    height:375px;
+    position:relative;
+    overflow:hidden;
+    background:#24140d;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .7s ease;
+}
+
+.slide.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.slide::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(31,17,10,.78),
+            rgba(31,17,10,.25) 65%,
+            rgba(31,17,10,.05)
+        );
+    z-index:1;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-content{
+    position:absolute;
+    z-index:2;
+    top:50%;
+    left:max(calc((100% - 1120px)/2),20px);
+    transform:translateY(-50%);
+    color:white;
+    width:480px;
+}
+
+.script{
+    font-size:20px;
+    font-style:italic;
+    color:#e9bd91;
+    margin-bottom:8px;
+}
+
+.hero-content h1{
+    font-size:44px;
+    line-height:1.05;
+    margin-bottom:13px;
+    text-shadow:0 3px 10px rgba(0,0,0,.4);
+}
+
+.hero-content p{
+    font-family:Arial,sans-serif;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:18px;
+    color:#eee;
+}
+
+.hero-btn{
+    border:none;
+    background:#a35c32;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:4px;
+    font-weight:bold;
+    font-size:12px;
+    transition:.25s;
+}
+
+.hero-btn:hover{
+    background:#7e4121;
+    transform:translateY(-2px);
+}
+
+
+/* HERO ARROWS */
+
+.slider-arrow{
+    position:absolute;
+    z-index:5;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:rgba(0,0,0,.45);
+    color:white;
+    font-size:28px;
+    display:grid;
+    place-items:center;
+    transition:.25s;
+}
+
+.slider-arrow:hover{
+    background:rgba(0,0,0,.7);
+}
+
+.prev{
+    left:30px;
+}
+
+.next{
+    right:30px;
+}
+
+
+/* SLIDER DOTS */
+
+.dots{
+    position:absolute;
+    bottom:16px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:5;
+    display:flex;
+    gap:12px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    border:2px solid white;
+    background:transparent;
+    cursor:pointer;
+}
+
+.dot.active{
+    background:white;
+}
+
+
+/* =========================================================
+   SPECIALTIES
+========================================================= */
+
+.specialties{
+    padding:20px 0 22px;
+    background:#fff;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:17px;
+}
+
+.section-heading h2{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.heading-decoration{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:9px;
+    color:#b5896d;
+}
+
+.heading-decoration::before,
+.heading-decoration::after{
+    content:"";
+    width:40px;
+    height:1px;
+    background:#b5896d;
+}
+
+.cupcake-symbol{
+    font-size:16px;
+}
+
+
+/* PRODUCT GRID */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.product-card{
+    background:white;
+    border:1px solid #ddd;
+    box-shadow:0 3px 7px rgba(0,0,0,.12);
+    transition:.3s;
+    overflow:hidden;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 18px rgba(0,0,0,.16);
+}
+
+.product-image{
+    height:130px;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.product-card:hover .product-image img{
+    transform:scale(1.05);
+}
+
+.product-info{
+    padding:10px 16px 12px;
+    text-align:center;
+}
+
+.product-info h3{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.product-info p{
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    line-height:1.4;
+    min-height:34px;
+    color:#555;
+}
+
+.price{
+    font-family:Arial,sans-serif;
+    font-size:14px;
+    font-weight:bold;
+    color:#774027;
+    margin:9px 0;
+}
+
+.add-cart{
+    background:white;
+    color:#7a4528;
+    border:1px solid #b4937f;
+    padding:8px 14px;
+    font-size:12px;
+    border-radius:4px;
+    transition:.25s;
+}
+
+.add-cart:hover{
+    background:#7a4528;
+    color:white;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    background:#321d12;
+    color:white;
+    padding:22px 0 10px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr 1fr 1.25fr;
+    gap:50px;
+}
+
+.footer-logo{
+    color:white;
+}
+
+.footer-about{
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    line-height:1.6;
+    color:#ddd;
+    max-width:220px;
+    margin-top:10px;
+}
+
+.footer-socials{
+    display:flex;
+    gap:18px;
+    margin-top:13px;
+}
+
+.footer-column h3{
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.footer-column a{
+    display:block;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    color:#eee;
+    margin-bottom:8px;
+    transition:.2s;
+}
+
+.footer-column a:hover{
+    color:#d7a06d;
+    padding-left:3px;
+}
+
+.newsletter p{
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    color:#ddd;
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+.newsletter-form{
+    display:flex;
+}
+
+.newsletter-form input{
+    width:70%;
+    border:none;
+    outline:none;
+    padding:10px 12px;
+    font-size:12px;
+}
+
+.newsletter-form button{
+    width:30%;
+    border:none;
+    background:#a35c32;
+    color:white;
+    font-size:11px;
+}
+
+.copyright{
+    border-top:1px solid rgba(255,255,255,.25);
+    margin-top:15px;
+    padding-top:9px;
+    text-align:center;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    color:#ddd;
+}
+
+
+/* =========================================================
+   CART PANEL
+========================================================= */
+
+.cart-panel{
+    position:fixed;
+    top:0;
+    right:-390px;
+    width:370px;
+    height:100vh;
+    background:#fff;
+    z-index:100;
+    box-shadow:-5px 0 25px rgba(0,0,0,.25);
+    transition:.35s;
+    display:flex;
+    flex-direction:column;
+}
+
+.cart-panel.open{
+    right:0;
+}
+
+.cart-header{
+    background:#321d12;
+    color:white;
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.cart-header h2{
+    font-size:20px;
+}
+
+.close-cart{
+    background:none;
+    border:none;
+    color:white;
+    font-size:25px;
+}
+
+.cart-items{
+    flex:1;
+    overflow:auto;
+    padding:18px;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    border-bottom:1px solid #ddd;
+    padding:12px 0;
+    font-family:Arial,sans-serif;
+}
+
+.cart-item h4{
+    font-size:13px;
+}
+
+.cart-item p{
+    font-size:11px;
+    color:#777;
+    margin-top:4px;
+}
+
+.remove-item{
+    border:none;
+    background:none;
+    color:#a34d2d;
+    font-size:11px;
+}
+
+.cart-footer{
+    padding:18px;
+    border-top:1px solid #ddd;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    font-weight:bold;
+    margin-bottom:12px;
+    font-family:Arial,sans-serif;
+}
+
+.checkout{
+    width:100%;
+    border:none;
+    padding:12px;
+    background:#7a4528;
+    color:white;
+    border-radius:4px;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:90;
+    display:none;
+}
+
+.overlay.show{
+    display:block;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#321d12;
+    color:white;
+    padding:13px 18px;
+    border-radius:5px;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:200;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+    .nav-links{
+        gap:18px;
+    }
+
+    .logo{
+        min-width:auto;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:750px){
+
+    .top-bar{
+        height:auto;
+        padding:8px 0;
+    }
+
+    .top-left{
+        gap:12px;
+        flex-wrap:wrap;
+    }
+
+    .top-item:nth-child(2){
+        display:none;
+    }
+
+    .socials{
+        display:none;
+    }
+
+    .navbar{
+        height:70px;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        left:0;
+        right:0;
+        top:70px;
+        background:#fff;
+        flex-direction:column;
+        gap:0;
+        padding:10px 20px 20px;
+        box-shadow:0 5px 15px rgba(0,0,0,.15);
+    }
+
+    .nav-links.open{
+        display:flex;
+    }
+
+    .nav-links a{
+        width:100%;
+        padding:13px;
+        border-bottom:1px solid #eee;
+    }
+
+    .nav-links a::after{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .order-btn{
+        display:none;
+    }
+
+    .hero{
+        height:480px;
+    }
+
+    .hero-content{
+        left:20px;
+        right:20px;
+        width:auto;
+        text-align:center;
+    }
+
+    .hero-content h1{
+        font-size:37px;
+    }
+
+    .hero-content p{
+        font-size:13px;
+    }
+
+    .prev{
+        left:10px;
+    }
+
+    .next{
+        right:10px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+    }
+
+    .product-image{
+        height:115px;
+    }
+
+    .product-info{
+        padding:9px;
+    }
+
+    .product-info h3{
+        font-size:15px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+        gap:30px;
+    }
+
+}
+
+
+@media(max-width:500px){
+
+    .container{
+        width:calc(100% - 25px);
+    }
+
+    .top-left{
+        font-size:10px;
+    }
+
+    .hero-content h1{
+        font-size:31px;
+    }
+
+    .script{
+        font-size:17px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .product-image{
+        height:180px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cart-panel{
+        width:100%;
+        right:-100%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<div class="top-bar">
+
+<div class="container top-inner">
+
+<div class="top-left">
+
+<div class="top-item">
+☎ +1 234 567 890
+</div>
+
+<div class="top-item">
+✉ info@bakery.com
+</div>
+
+<div class="top-item">
+📍 123 Bakery Street, Sweet City, CA 90210
+</div>
+
+</div>
+
+<div class="socials">
+<span>f</span>
+<span>◎</span>
+<span>♥</span>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header class="navbar">
+
+<div class="container nav-inner">
+
+<a href="#home" class="logo">
+
+<div class="logo-cupcake">
+🧁
+</div>
+
+<div class="logo-text">
+
+SweetCrust
+
+<small>• B A K E R Y •</small>
+
+</div>
+
+</a>
+
+
+<nav class="nav-links" id="navLinks">
+
+<a href="#home" class="active">
+Home
+</a>
+
+<a href="#about">
+About Us
+</a>
+
+<a href="#products">
+Products
+</a>
+
+<a href="#gallery">
+Gallery
+</a>
+
+<a href="#blog">
+Blog
+</a>
+
+<a href="#contact">
+Contact Us
+</a>
+
+</nav>
+
+
+<button
+class="order-btn"
+id="orderButton"
+>
+Order Now 🛍
+<span class="cart-count" id="cartCount">0</span>
+</button>
+
+
+<button
+class="menu-btn"
+id="menuBtn"
+>
+☰
+</button>
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO SLIDER
+===================================================== -->
+
+<section class="hero" id="home">
+
+
+<!-- SLIDE 1 -->
+
+<div class="slide active">
+
+<img
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1800&q=85"
+alt="Chocolate cake"
+>
+
+<div class="hero-content">
+
+<div class="script">
+Freshly Baked, Just for You
+</div>
+
+<h1>
+Delicious Treats<br>
+Made with Love
+</h1>
+
+<p>
+From classic breads to delightful cakes,<br>
+we bake happiness in every bite.
+</p>
+
+<button
+class="hero-btn"
+onclick="scrollToProducts()"
+>
+Explore Our Products
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 2 -->
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1800&q=85"
+alt="Cupcakes"
+>
+
+<div class="hero-content">
+
+<div class="script">
+Fresh From Our Oven
+</div>
+
+<h1>
+Sweet Moments<br>
+Start Here
+</h1>
+
+<p>
+Beautiful cupcakes and desserts<br>
+made fresh every morning.
+</p>
+
+<button
+class="hero-btn"
+onclick="scrollToProducts()"
+>
+Explore Our Products
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 3 -->
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1800&q=85"
+alt="Fresh bread"
+>
+
+<div class="hero-content">
+
+<div class="script">
+Baked Fresh Every Day
+</div>
+
+<h1>
+Warm Bread.<br>
+Happy Hearts.
+</h1>
+
+<p>
+Traditional recipes with the finest<br>
+ingredients for every occasion.
+</p>
+
+<button
+class="hero-btn"
+onclick="scrollToProducts()"
+>
+Explore Our Products
+</button>
+
+</div>
+
+</div>
+
+
+<button
+class="slider-arrow prev"
+id="prevSlide"
+>
+‹
+</button>
+
+<button
+class="slider-arrow next"
+id="nextSlide"
+>
+›
+</button>
+
+
+<div class="dots" id="dots">
+
+<span class="dot active"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SPECIALTIES
+===================================================== -->
+
+<section
+class="specialties"
+id="products"
+>
+
+<div class="container">
+
+
+<div class="section-heading">
+
+<h2>
+Our Specialties
+</h2>
+
+<div class="heading-decoration">
+
+<span class="cupcake-symbol">
+🧁
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="product-grid">
+
+
+<!-- PRODUCT 1 -->
+
+<div class="product-card">
+
+<div class="product-image">
+
+<img
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85"
+alt="Chocolate Cake"
+>
+
+</div>
+
+<div class="product-info">
+
+<h3>
+Chocolate Cake
+</h3>
+
+<p>
+Rich, moist and layered with premium chocolate.
+</p>
+
+<div class="price">
+$24.99
+</div>
+
+<button
+class="add-cart"
+data-name="Chocolate Cake"
+data-price="24.99"
+>
+🛒 Add to Cart
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 2 -->
+
+<div class="product-card">
+
+<div class="product-image">
+
+<img
+src="https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=700&q=85"
+alt="Cupcakes"
+>
+
+</div>
+
+<div class="product-info">
+
+<h3>
+Cupcakes
+</h3>
+
+<p>
+Soft, fluffy and topped with delicious frosting.
+</p>
+
+<div class="price">
+$14.99
+</div>
+
+<button
+class="add-cart"
+data-name="Cupcakes"
+data-price="14.99"
+>
+🛒 Add to Cart
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 3 -->
+
+<div class="product-card">
+
+<div class="product-image">
+
+<img
+src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=85"
+alt="Fresh Bread"
+>
+
+</div>
+
+<div class="product-info">
+
+<h3>
+Fresh Breads
+</h3>
+
+<p>
+Baked daily with the finest ingredients.
+</p>
+
+<div class="price">
+$9.99
+</div>
+
+<button
+class="add-cart"
+data-name="Fresh Breads"
+data-price="9.99"
+>
+🛒 Add to Cart
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 4 -->
+
+<div class="product-card">
+
+<div class="product-image">
+
+<img
+src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=85"
+alt="Chocolate Cookies"
+>
+
+</div>
+
+<div class="product-info">
+
+<h3>
+Choco Cookies
+</h3>
+
+<p>
+Crispy, crunchy and loaded with chocolate chips.
+</p>
+
+<div class="price">
+$6.99
+</div>
+
+<button
+class="add-cart"
+data-name="Choco Cookies"
+data-price="6.99"
+>
+🛒 Add to Cart
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT PLACEHOLDER
+===================================================== -->
+
+<section id="about" style="display:none;"></section>
+<section id="gallery" style="display:none;"></section>
+<section id="blog" style="display:none;"></section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer id="contact">
+
+<div class="container">
+
+
+<div class="footer-grid">
+
+
+<div>
+
+<div class="logo footer-logo">
+
+<div class="logo-cupcake">
+🧁
+</div>
+
+<div class="logo-text" style="color:white;">
+
+SweetCrust
+
+<small>
+• B A K E R Y •
+</small>
+
+</div>
+
+</div>
+
+
+<p class="footer-about">
+
+We bake fresh and delicious
+goodness to make your moments
+sweeter.
+
+</p>
+
+
+<div class="footer-socials">
+
+<span>●</span>
+<span>◎</span>
+<span>♥</span>
+<span>◉</span>
+
+</div>
+
+</div>
+
+
+
+<div class="footer-column">
+
+<h3>
+Quick Links
+</h3>
+
+<a href="#home">Home</a>
+<a href="#about">About Us</a>
+<a href="#products">Products</a>
+<a href="#gallery">Gallery</a>
+<a href="#blog">Blog</a>
+<a href="#contact">Contact Us</a>
+
+</div>
+
+
+
+<div class="footer-column">
+
+<h3>
+Our Products
+</h3>
+
+<a href="#products">Cakes</a>
+<a href="#products">Breads</a>
+<a href="#products">Pastries</a>
+<a href="#products">Cookies</a>
+<a href="#products">Cupcakes</a>
+
+</div>
+
+
+
+<div class="newsletter">
+
+<h3>
+Newsletter
+</h3>
+
+<p>
+Subscribe to get updates on our
+latest offers and products.
+</p>
+
+
+<form
+class="newsletter-form"
+id="newsletterForm"
+>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required
+>
+
+<button type="submit">
+Subscribe
+</button>
+
+</form>
+
+</div>
+
+
+</div>
+
+
+<div class="copyright">
+
+© 2024 SweetCrust Bakery. All Rights Reserved.
+
+</div>
+
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     CART PANEL
+===================================================== -->
+
+<div
+class="overlay"
+id="overlay"
+></div>
+
+
+<div
+class="cart-panel"
+id="cartPanel"
+>
+
+<div class="cart-header">
+
+<h2>
+Your Cart
+</h2>
+
+<button
+class="close-cart"
+id="closeCart"
+>
+×
+</button>
+
+</div>
+
+
+<div
+class="cart-items"
+id="cartItems"
+>
+
+<p
+style="
+text-align:center;
+font-family:Arial;
+font-size:13px;
+color:#777;
+padding:30px 0;
+"
+>
+Your cart is empty.
+</p>
+
+</div>
+
+
+<div class="cart-footer">
+
+<div class="cart-total">
+
+<span>
+Total
+</span>
+
+<span id="cartTotal">
+$0.00
+</span>
+
+</div>
+
+<button
+class="checkout"
+id="checkout"
+>
+Proceed to Checkout
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div
+class="toast"
+id="toast"
+>
+Added to cart
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   HERO SLIDER
+========================================================= */
+
+const slides =
+document.querySelectorAll(".slide");
+
+const dots =
+document.querySelectorAll(".dot");
+
+let currentSlide = 0;
+
+let sliderTimer;
+
+
+function showSlide(index){
+
+    if(index < 0){
+        index = slides.length - 1;
+    }
+
+    if(index >= slides.length){
+        index = 0;
+    }
+
+    slides.forEach(slide => {
+        slide.classList.remove("active");
+    });
+
+    dots.forEach(dot => {
+        dot.classList.remove("active");
+    });
+
+    slides[index].classList.add("active");
+
+    dots[index].classList.add("active");
+
+    currentSlide = index;
+
+}
+
+
+function nextSlide(){
+
+    showSlide(currentSlide + 1);
+
+}
+
+
+function previousSlide(){
+
+    showSlide(currentSlide - 1);
+
+}
+
+
+document
+.getElementById("nextSlide")
+.addEventListener("click", () => {
+
+    nextSlide();
+
+    restartSlider();
+
+});
+
+
+document
+.getElementById("prevSlide")
+.addEventListener("click", () => {
+
+    previousSlide();
+
+    restartSlider();
+
+});
+
+
+dots.forEach((dot,index) => {
+
+    dot.addEventListener("click", () => {
+
+        showSlide(index);
+
+        restartSlider();
+
+    });
+
+});
+
+
+function startSlider(){
+
+    sliderTimer =
+    setInterval(nextSlide,5000);
+
+}
+
+
+function restartSlider(){
+
+    clearInterval(sliderTimer);
+
+    startSlider();
+
+}
+
+
+startSlider();
+
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const navLinks =
+document.getElementById("navLinks");
+
+
+menuBtn.addEventListener("click", () => {
+
+    navLinks.classList.toggle("open");
+
+    menuBtn.textContent =
+        navLinks.classList.contains("open")
+        ? "×"
+        : "☰";
+
+});
+
+
+document
+.querySelectorAll(".nav-links a")
+.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.classList.remove("open");
+
+        menuBtn.textContent = "☰";
+
+    });
+
+});
+
+
+
+/* =========================================================
+   PRODUCT SCROLL
+========================================================= */
+
+function scrollToProducts(){
+
+    document
+    .getElementById("products")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+
+/* =========================================================
+   SHOPPING CART
+========================================================= */
+
+let cart = [];
+
+
+const cartPanel =
+document.getElementById("cartPanel");
+
+const cartItems =
+document.getElementById("cartItems");
+
+const cartCount =
+document.getElementById("cartCount");
+
+const cartTotal =
+document.getElementById("cartTotal");
+
+const overlay =
+document.getElementById("overlay");
+
+
+document
+.getElementById("orderButton")
+.addEventListener("click",openCart);
+
+
+document
+.getElementById("closeCart")
+.addEventListener("click",closeCart);
+
+
+overlay.addEventListener(
+    "click",
+    closeCart
+);
+
+
+function openCart(){
+
+    cartPanel.classList.add("open");
+
+    overlay.classList.add("show");
+
+}
+
+
+function closeCart(){
+
+    cartPanel.classList.remove("open");
+
+    overlay.classList.remove("show");
+
+}
+
+
+document
+.querySelectorAll(".add-cart")
+.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const name =
+            button.dataset.name;
+
+        const price =
+            Number(button.dataset.price);
+
+
+        const existing =
+            cart.find(item =>
+                item.name === name
+            );
+
+
+        if(existing){
+
+            existing.quantity++;
+
+        }else{
+
+            cart.push({
+
+                name:name,
+
+                price:price,
+
+                quantity:1
+
+            });
+
+        }
+
+
+        updateCart();
+
+        showToast(
+            name + " added to cart"
+        );
+
+    });
+
+});
+
+
+function updateCart(){
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    let count = 0;
+
+
+    if(cart.length === 0){
+
+        cartItems.innerHTML = `
+
+            <p
+            style="
+            text-align:center;
+            font-family:Arial;
+            font-size:13px;
+            color:#777;
+            padding:30px 0;
+            "
+            >
+            Your cart is empty.
+            </p>
+
+        `;
+
+    }
+
+
+    cart.forEach((item,index) => {
+
+        total +=
+            item.price * item.quantity;
+
+        count += item.quantity;
+
+
+        const element =
+            document.createElement("div");
+
+        element.className =
+            "cart-item";
+
+
+        element.innerHTML = `
+
+            <div>
+
+                <h4>
+                    ${item.name}
+                </h4>
+
+                <p>
+                    ${item.quantity} ×
+                    $${item.price.toFixed(2)}
+                </p>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    $${(
+                        item.price *
+                        item.quantity
+                    ).toFixed(2)}
+                </strong>
+
+                <br>
+
+                <button
+                class="remove-item"
+                onclick="removeItem(${index})"
+                >
+                Remove
+                </button>
+
+            </div>
+
+        `;
+
+
+        cartItems.appendChild(element);
+
+    });
+
+
+    cartCount.textContent =
+        count;
+
+    cartTotal.textContent =
+        "$" + total.toFixed(2);
+
+}
+
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+
+    showToast("Item removed");
+
+}
+
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
+
+document
+.getElementById("checkout")
+.addEventListener("click", () => {
+
+    if(cart.length === 0){
+
+        showToast(
+            "Your cart is empty."
+        );
+
+        return;
+
+    }
+
+    showToast(
+        "Checkout demo — connect payment gateway here."
+    );
+
+});
+
+
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+document
+.getElementById("newsletterForm")
+.addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+
+    if(!email){
+
+        showToast(
+            "Please enter your email."
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "Thank you for subscribing!"
+    );
+
+
+    document
+    .getElementById("email")
+    .value = "";
+
+});
+
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimeout;
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimeout);
+
+
+    toastTimeout =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },2500);
+
+}
+
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const sections =
+            document.querySelectorAll(
+                "section[id]"
+            );
+
+        let current = "home";
+
+
+        sections.forEach(section => {
+
+            const top =
+                section.offsetTop - 120;
+
+
+            if(window.scrollY >= top){
+
+                current =
+                    section.id;
+
+            }
+
+        });
+
+
+        document
+        .querySelectorAll(".nav-links a")
+        .forEach(link => {
+
+            link.classList.remove("active");
+
+
+            if(
+                link.getAttribute("href") ===
+                "#" + current
+            ){
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    }
+);
+
+</script>
+
+</body>
+</html>
